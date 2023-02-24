@@ -27,7 +27,8 @@ COPY bot.py .
 ENV GPT_BOT_TOKEN=6005942260:AAEzrgaQWK6KODDf5RfBX8bQZ1BirntJ1fI
 ENV OPENAI_API_KEY=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
 ENV PORT=8080
-ENV AUTHORIZED_USERS=""
+# Leave authorized users empty to allow everyone to use the bot. ex: ENV AUTHORIZED_USERS=""
+ENV AUTHORIZED_USERS="username1,username2"
 ENV BOT_PERSONALITY=Friendly
 
 # Expose the port number for Cloud Run to map it to an incoming request
