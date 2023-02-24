@@ -1,0 +1,37 @@
+# Use Python 3.11 as the base image
+FROM python:3.11-slim
+
+# Set environment variables for the Python interpreter and pip
+ENV PYTHONFAULTHANDLER=1
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONHASHSEED=random
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PIP_NO_CACHE_DIR=off
+ENV PIP_DISABLE_PIP_VERSION_CHECK=on
+ENV PIP_DEFAULT_TIMEOUT=100
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the requirements.txt file to the /app directory
+COPY requirements.txt .
+
+# Install the dependencies listed in requirements.txt
+RUN pip install -r requirements.txt
+RUN pip install "Flask[async]"
+
+# Copy the openai-chat-tbot.py file to the /app directory
+COPY bot.py .
+
+# Set environment variables for the API token, OpenAI API key, port number, authorized users and bot personality
+ENV GPT_BOT_TOKEN=6005942260:AAEzrgaQWK6KODDf5RfBX8bQZ1BirntJ1fI
+ENV OPENAI_API_KEY=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
+ENV PORT=8080
+ENV AUTHORIZED_USERS=""
+ENV BOT_PERSONALITY=Friendly
+
+# Expose the port number for Cloud Run to map it to an incoming request
+EXPOSE 8080
+
+# Run the openai-chat-tbot.py file using the Python interpreter when the container starts
+CMD ["python", "bot.py"]
