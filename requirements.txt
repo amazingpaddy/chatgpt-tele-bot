@@ -3,3 +3,4 @@ requests~=2.27.1
 aiohttp~=3.8.4
 telebot~=0.0.5
 flask~=2.0.3
+edgegpt~=0.0.51
