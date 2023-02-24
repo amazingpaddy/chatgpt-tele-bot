@@ -9,7 +9,7 @@ from flask import Flask, request
 # Get OpenAI API key, Telegram bot token, bot personality, and authorized users from environment variables
 API_KEY = os.environ.get('OPENAI_API_KEY')
 BOT_TOKEN = os.environ.get('GPT_BOT_TOKEN')
-authorized_users = os.environ.get('AUTHORIZED_USERS').split(',')
+AUTHORIZED_USERS = os.environ.get('AUTHORIZED_USERS').split(',')
 BOT_PERSONALITY = os.environ.get('BOT_PERSONALITY').split(',')
 
 # Set OpenAI model and bot personality
@@ -76,7 +76,7 @@ async def ask(message):
         username = message.from_user.username
 
         # Check if the user is authorized to use the bot
-        if username not in authorized_users:
+        if username not in AUTHORIZED_USERS:
             await bot.reply_to(message, "Not authorized to use this bot")
             return
 
